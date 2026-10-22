@@ -1,0 +1,203 @@
+
+[
+  {
+    "id": "t-01",
+    "type": "theory",
+    "title": "JavaScript Event Loop, Microtasks and Macrotasks",
+    "category": "JavaScript Core",
+    "folder": "notes",
+    "filename": "01-javascript-event-loop.md",
+    "commitMessage": "docs(notes): add JavaScript Event Loop, microtasks and macrotasks deep dive",
+    "content": "# 🔄 JavaScript Event Loop: Microtasks and Macrotasks\n\nJavaScript is a **single-threaded** programming language that can only execute one operation at a time. So how does it work asynchronously (non-blocking)? This is achieved through the **Event Loop** mechanism.\n\n---\n\n## 🧱 Core components:\n\n1. **Call Stack**:\n   * The stack of functions currently being executed (LIFO — Last In, First Out).\n2. **Web APIs (Browser environment)**:\n   * Asynchronous capabilities provided by the browser, such as `setTimeout`, `fetch`, and DOM events.\n3. **Microtask Queue**:\n   * Results of `Promise.then/catch/finally`, `queueMicrotask`, and `async/await`.\n4. **Macrotask / Task Queue**:\n   * `setTimeout`, `setInterval`, `setImmediate`, I/O operations.\n\n---\n\n## ⚡ Execution order (Priority rule):\n\n1. All synchronous code on the Call Stack runs to completion.\n2. As soon as the Call Stack is empty, the Event Loop picks up and executes all tasks in the **Microtask Queue** in order.\n3. After the microtasks finish, **one** Macrotask is taken and executed.\n4. The cycle repeats.\n\n> 💡 **Rule**: Microtasks always run before Macrotasks!\n"
+  },
+  {
+    "id": "p-01",
+    "type": "practical",
+    "title": "Array Transformation Utilities (groupBy, chunk, uniqueBy)",
+    "category": "TypeScript Utilities",
+    "folder": "practice",
+    "filename": "01-array-transformation-utils.ts",
+    "commitMessage": "feat(practice): add array transformation utility functions (groupBy, chunk, uniqueBy)",
+    "content": "/**\n * Array Transformation Utilities\n * The most commonly used array helper functions in frontend projects\n */\n\n// 1. groupBy: Group elements by a given key\nexport function groupBy<T, K extends string | number | symbol>(\n  array: T[],\n  keySelector: (item: T) => K\n): Record<K, T[]> {\n  return array.reduce((accumulator, currentItem) => {\n    const key = keySelector(currentItem);\n    if (!accumulator[key]) {\n      accumulator[key] = [];\n    }\n    accumulator[key].push(currentItem);\n    return accumulator;\n  }, {} as Record<K, T[]>);\n}\n\n// 2. chunk: Split an array into chunks of a specified size\nexport function chunk<T>(array: T[], size: number): T[][] {\n  if (size <= 0) throw new Error('Size must be greater than zero');\n  const chunks: T[][] = [];\n  for (let i = 0; i < array.length; i += size) {\n    chunks.push(array.slice(i, i + size));\n  }\n  return chunks;\n}\n\n// 3. uniqueBy: Select unique elements from an array of objects by a key\nexport function uniqueBy<T, K>(array: T[], keySelector: (item: T) => K): T[] {\n  const seen = new Set<K>();\n  return array.filter(item => {\n    const key = keySelector(item);\n    if (seen.has(key)) {\n      return false;\n    }\n    seen.add(key);\n    return true;\n  });\n}\n\n// Sample tests:\nconst users = [\n  { id: 1, name: 'Komila', role: 'developer' },\n  { id: 2, name: 'Anvar', role: 'designer' },\n  { id: 3, name: 'Malika', role: 'developer' },\n];\n\nconsole.log('Grouping:', groupBy(users, u => u.role));\nconsole.log('Chunking:', chunk([1, 2, 3, 4, 5, 6, 7], 3));\n"
+  },
+  {
+    "id": "t-02",
+    "type": "theory",
+    "title": "React useEffect Lifecycle and Cleanup Functions",
+    "category": "React Core",
+    "folder": "notes",
+    "filename": "02-react-use-effect-lifecycle.md",
+    "commitMessage": "docs(notes): add React useEffect lifecycle mapping and cleanup guide",
+    "content": "# ⚛️ React `useEffect` Hook and the Cleanup Mechanism\n\nIn React function components, `useEffect` is used to manage side effects (API calls, subscriptions, DOM manipulation).\n\n---\n\n## 📌 Dependency Array rules:\n\n1. **No array provided**:\n   ```tsx\n   useEffect(() => {\n     // Runs on every render\n   });\n   ```\n\n2. **Empty array (`[]`)**:\n   ```tsx\n   useEffect(() => {\n     // Runs only once, when the component is first rendered on screen (Mount)\n   }, []);\n   ```\n\n3. **Array with values (`[userId, count]`)**:\n   ```tsx\n   useEffect(() => {\n     // Runs when userId or count changes\n   }, [userId, count]);\n   ```\n\n---\n\n## 🧹 Why is the cleanup function needed?\n\nA cleanup function is returned to prevent memory leaks when the component is removed from the DOM (Unmount) or before the effect re-runs:\n\n```tsx\nuseEffect(() => {\n  const handleResize = () => console.log(window.innerWidth);\n  window.addEventListener('resize', handleResize);\n\n  // Cleanup:\n  return () => {\n    window.removeEventListener('resize', handleResize);\n  };\n}, []);\n```\n"
+  },
+  {
+    "id": "p-02",
+    "type": "practical",
+    "title": "Custom Debounce and Throttle Implementation",
+    "category": "JavaScript Performance",
+    "folder": "practice",
+    "filename": "02-custom-debounce-throttle.ts",
+    "commitMessage": "feat(practice): implement custom debounce and throttle functions with cancel support",
+    "content": "/**\n * Custom Debounce and Throttle functions\n * Optimizing frequently triggered events (scroll, resize, search input)\n */\n\nexport function debounce<T extends (...args: any[]) => any>(\n  func: T,\n  delay: number\n): { (...args: Parameters<T>): void; cancel: () => void } {\n  let timerId: ReturnType<typeof setTimeout> | null = null;\n\n  const debounced = (...args: Parameters<T>) => {\n    if (timerId !== null) {\n      clearTimeout(timerId);\n    }\n    timerId = setTimeout(() => {\n      func(...args);\n      timerId = null;\n    }, delay);\n  };\n\n  debounced.cancel = () => {\n    if (timerId !== null) {\n      clearTimeout(timerId);\n      timerId = null;\n    }\n  };\n\n  return debounced;\n}\n\nexport function throttle<T extends (...args: any[]) => any>(\n  func: T,\n  limit: number\n): (...args: Parameters<T>) => void {\n  let inThrottle = false;\n\n  return (...args: Parameters<T>) => {\n    if (!inThrottle) {\n      func(...args);\n      inThrottle = true;\n      setTimeout(() => {\n        inThrottle = false;\n      }, limit);\n    }\n  };\n}\n"
+  },
+  {
+    "id": "t-03",
+    "type": "theory",
+    "title": "Zustand vs Redux Toolkit: Why Is Zustand Becoming Popular?",
+    "category": "State Management",
+    "folder": "notes",
+    "filename": "03-zustand-vs-redux-toolkit.md",
+    "commitMessage": "docs(notes): add Zustand vs Redux Toolkit architecture comparison",
+    "content": "# 🐻 Zustand vs Redux Toolkit: Which One Should You Choose?\n\nThe two most popular tools for managing global state in frontend development are **Redux Toolkit (RTK)** and **Zustand**.\n\n---\n\n## 📊 Comparison:\n\n| Feature | Redux Toolkit | Zustand |\n| :--- | :--- | :--- |\n| **Boilerplate code** | A lot (Slice, Store, Provider, Hooks) | Very little (a single `create` function) |\n| **Provider required?** | Yes (`<Provider store={store}>`) | **No!** Used directly |\n| **Library size** | ~35-40 KB | **~1-2 KB** (extremely lightweight) |\n| **Learning curve** | Moderate | Very fast and intuitive |\n| **Async operations** | Requires `createAsyncThunk` | A plain `async/await` function is enough |\n\n---\n\n## 🚀 Conclusion:\n\n* **Zustand** — The fastest, most convenient and lightweight solution for small, medium and many modern large projects.\n* **Redux Toolkit** — Used in very large enterprise teams where strict standards are required.\n"
+  },
+  {
+    "id": "p-03",
+    "type": "practical",
+    "title": "useLocalStorage React Custom Hook with Cross-Tab Sync",
+    "category": "React Hooks",
+    "folder": "practice",
+    "filename": "03-use-local-storage.ts",
+    "commitMessage": "feat(practice): create useLocalStorage custom React hook with tab synchronization",
+    "content": "import { useState, useEffect, useCallback } from 'react';\n\n/**\n * useLocalStorage custom hook\n * Creates a reactive binding between the browser's localStorage and state\n */\nexport function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T | ((val: T) => T)) => void] {\n  const readValue = useCallback((): T => {\n    if (typeof window === 'undefined') {\n      return initialValue;\n    }\n\n    try {\n      const item = window.localStorage.getItem(key);\n      return item ? (JSON.parse(item) as T) : initialValue;\n    } catch (error) {\n      console.warn(`Error reading localStorage key \"${key}\":`, error);\n      return initialValue;\n    }\n  }, [key, initialValue]);\n\n  const [storedValue, setStoredValue] = useState<T>(readValue);\n\n  const setValue = useCallback(\n    (value: T | ((val: T) => T)) => {\n      try {\n        const newValue = value instanceof Function ? value(storedValue) : value;\n        window.localStorage.setItem(key, JSON.stringify(newValue));\n        setStoredValue(newValue);\n        window.dispatchEvent(new Event('local-storage-change'));\n      } catch (error) {\n        console.warn(`Error writing localStorage key \"${key}\":`, error);\n      }\n    },\n    [key, storedValue]\n  );\n\n  useEffect(() => {\n    const handleStorageChange = () => {\n      setStoredValue(readValue());\n    };\n\n    window.addEventListener('storage', handleStorageChange);\n    window.addEventListener('local-storage-change', handleStorageChange);\n\n    return () => {\n      window.removeEventListener('storage', handleStorageChange);\n      window.removeEventListener('local-storage-change', handleStorageChange);\n    };\n  }, [readValue]);\n\n  return [storedValue, setValue];\n}\n"
+  },
+  {
+    "id": "t-04",
+    "type": "theory",
+    "title": "JavaScript Closures and Scope",
+    "category": "JavaScript Core",
+    "folder": "notes",
+    "filename": "04-javascript-closures.md",
+    "commitMessage": "docs(notes): explain JavaScript Closures, lexical environment and practical uses",
+    "content": "# 🔒 JavaScript Closures\n\nA **closure** is the ability of an inner function to **remember** the variables of its outer (parent) lexical environment, even after the parent function has finished executing.\n\n---\n\n## 📝 Simple practical example:\n\n```javascript\nfunction createCounter() {\n  let count = 0; // Private variable\n\n  return {\n    increment: () => ++count,\n    decrement: () => --count,\n    getCount: () => count\n  };\n}\n\nconst counter = createCounter();\nconsole.log(counter.increment()); // 1\nconsole.log(counter.increment()); // 2\nconsole.log(counter.getCount());  // 2\n// The count variable cannot be modified directly from the outside!\n```\n\n---\n\n## 🎯 Key benefits:\n1. **Data Encapsulation (hiding data)**: Creating private variables.\n2. **Currying**: Building functions that take their arguments in stages.\n3. **Preserving state in callbacks and event handling**.\n"
+  },
+  {
+    "id": "p-04",
+    "type": "practical",
+    "title": "Deep Clone Utility with Circular Reference Handling",
+    "category": "JavaScript Core",
+    "folder": "practice",
+    "filename": "04-deep-clone-util.ts",
+    "commitMessage": "feat(practice): implement deep clone function supporting circular references",
+    "content": "/**\n * Complete Deep Clone function\n * Creates a fully new copy of objects and arrays in memory\n */\nexport function deepClone<T>(obj: T, hash = new WeakMap()): T {\n  // Primitive values and functions are returned directly\n  if (Object(obj) !== obj || typeof obj === 'function') {\n    return obj;\n  }\n\n  // Check for circular references\n  if (hash.has(obj as object)) {\n    return hash.get(obj as object);\n  }\n\n  // Copy Date and RegExp objects separately\n  if (obj instanceof Date) return new Date(obj.getTime()) as unknown as T;\n  if (obj instanceof RegExp) return new RegExp(obj.source, obj.flags) as unknown as T;\n\n  // Create a new copy for an array or object\n  const result = (Array.isArray(obj) ? [] : Object.create(Object.getPrototypeOf(obj))) as T;\n  hash.set(obj as object, result);\n\n  for (const key of Object.keys(obj)) {\n    (result as any)[key] = deepClone((obj as any)[key], hash);\n  }\n\n  return result;\n}\n"
+  },
+  {
+    "id": "t-05",
+    "type": "theory",
+    "title": "React Performance: useMemo, useCallback and React.memo",
+    "category": "React Optimization",
+    "folder": "notes",
+    "filename": "05-react-performance-optimization.md",
+    "commitMessage": "docs(notes): add React optimization guide with useMemo, useCallback and React.memo",
+    "content": "# ⚡ React Performance Optimization: When Should You Use It?\n\nNew developers often wrap every function and variable in `useCallback` or `useMemo`. This actually backfires — it can slow your app down.\n\n---\n\n## 🔍 When to use what?\n\n1. **`React.memo`**:\n   * When a component should re-render only if its props change.\n\n2. **`useCallback`**:\n   * When passing a function defined inside a component as a prop to child components wrapped in `React.memo`.\n   * Otherwise, a new function reference is created on every render and the child re-renders anyway.\n\n3. **`useMemo`**:\n   * To cache the results of expensive (heavy) calculations:\n   ```tsx\n   const filteredList = useMemo(() => {\n     return heavyCalculation(items);\n   }, [items]);\n   ```\n"
+  },
+  {
+    "id": "p-05",
+    "type": "practical",
+    "title": "Fetch with Exponential Backoff Retry Utility",
+    "category": "Network & API",
+    "folder": "practice",
+    "filename": "05-fetch-with-retry.ts",
+    "commitMessage": "feat(practice): implement fetchWithRetry with exponential backoff algorithm",
+    "content": "/**\n * Fetch with Retry & Exponential Backoff\n * Automatically resends requests during network outages or when the server is temporarily unresponsive\n */\n\ninterface RetryOptions {\n  retries?: number;\n  delayMs?: number;\n  backoffFactor?: number;\n}\n\nexport async function fetchWithRetry(\n  url: string,\n  options: RequestInit = {},\n  retryOptions: RetryOptions = {}\n): Promise<Response> {\n  const { retries = 3, delayMs = 1000, backoffFactor = 2 } = retryOptions;\n\n  let attempt = 0;\n  let currentDelay = delayMs;\n\n  while (attempt < retries) {\n    try {\n      const response = await fetch(url, options);\n      if (response.ok || response.status < 500) {\n        return response; // No retry on 2xx, 3xx or 4xx\n      }\n      throw new Error(`Server error: ${response.status}`);\n    } catch (err) {\n      attempt++;\n      if (attempt >= retries) {\n        throw err;\n      }\n      console.warn(`Request failed. Retrying in ${currentDelay}ms (attempt: ${attempt}/${retries})`);\n      await new Promise(resolve => setTimeout(resolve, currentDelay));\n      currentDelay *= backoffFactor;\n    }\n  }\n\n  throw new Error('Maximum number of retries exhausted');\n}\n"
+  },
+  {
+    "id": "t-06",
+    "type": "theory",
+    "title": "TypeScript: Interface vs Type Aliases Comparison",
+    "category": "TypeScript",
+    "folder": "notes",
+    "filename": "06-typescript-interface-vs-type.md",
+    "commitMessage": "docs(notes): add comprehensive TypeScript Interface vs Type comparison guide",
+    "content": "# 📘 TypeScript: `interface` vs `type`\n\nIn TypeScript, either `interface` or `type` is used to define data structures. They are similar in many ways, but there are important differences.\n\n---\n\n## ⚖️ Key differences:\n\n1. **Declaration Merging (merging interfaces with the same name)**:\n   * If an `interface` is declared multiple times with the same name, its fields are merged automatically.\n   * With `type`, the name cannot be redeclared (it throws an error).\n\n2. **Unions and Primitives**:\n   * With `type` you can define Unions (`type Status = 'pending' | 'success'`) and name primitives.\n   * `interface` can only describe Object or Function structures.\n\n---\n\n## 💡 Rule of thumb:\n* Use **`interface`** for object shapes and library models,\n* Use **`type`** for Unions, Tuples and complex type combinations.\n"
+  },
+  {
+    "id": "p-06",
+    "type": "practical",
+    "title": "Form Validation and Sanitization Rules",
+    "category": "Forms & Security",
+    "folder": "practice",
+    "filename": "06-form-validators.ts",
+    "commitMessage": "feat(practice): add form validation regex rules and sanitization helpers",
+    "content": "/**\n * Form data validation and sanitization rules\n */\n\nexport const Validators = {\n  isEmail: (email: string): boolean => {\n    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$/;\n    return emailRegex.test(email.trim());\n  },\n\n  isUzbekPhone: (phone: string): boolean => {\n    // Format: +998901234567 or 998901234567\n    const phoneRegex = /^(\\+?998)?[0-9]{9}$/;\n    const cleanPhone = phone.replace(/\\s+/g, '');\n    return phoneRegex.test(cleanPhone);\n  },\n\n  isStrongPassword: (password: string): { isValid: boolean; errors: string[] } => {\n    const errors: string[] = [];\n    if (password.length < 8) errors.push('Must be at least 8 characters long');\n    if (!/[A-Z]/.test(password)) errors.push('Must contain at least 1 uppercase letter');\n    if (!/[a-z]/.test(password)) errors.push('Must contain at least 1 lowercase letter');\n    if (!/[0-9]/.test(password)) errors.push('Must contain at least 1 digit');\n\n    return {\n      isValid: errors.length === 0,\n      errors\n    };\n  },\n\n  sanitizeInput: (input: string): string => {\n    return input\n      .replace(/&/g, '&amp;')\n      .replace(/</g, '&lt;')\n      .replace(/>/g, '&gt;')\n      .replace(/\"/g, '&quot;')\n      .replace(/'/g, '&#039;');\n  }\n};\n"
+  },
+  {
+    "id": "t-07",
+    "type": "theory",
+    "title": "CSS Grid and Flexbox: 1D vs 2D Layout Differences",
+    "category": "CSS & Layout",
+    "folder": "notes",
+    "filename": "07-css-flexbox-vs-grid.md",
+    "commitMessage": "docs(notes): add CSS Flexbox vs Grid architectural decision guide",
+    "content": "# 🎨 CSS Flexbox vs CSS Grid\n\nKnowing when to use Flexbox and when to use Grid is one of the most frequently asked questions in modern web design.\n\n---\n\n## 📌 Key difference:\n\n* **Flexbox (1D - one-dimensional)**: Arranges elements along a single axis only — either as a row or as a column.\n  * *Best for*: Navbar menus, button groups, elements inside a card.\n* **Grid (2D - two-dimensional)**: Arranges elements into cells across both rows and columns at the same time.\n  * *Best for*: Full page layouts (Dashboard layout), galleries, complex card collections.\n"
+  },
+  {
+    "id": "p-07",
+    "type": "practical",
+    "title": "useDebounceValue Hook for Search Inputs",
+    "category": "React Hooks",
+    "folder": "practice",
+    "filename": "07-use-debounce-value.ts",
+    "commitMessage": "feat(practice): create useDebounceValue React hook for real-time search inputs",
+    "content": "import { useState, useEffect } from 'react';\n\n/**\n * useDebounceValue Hook\n * Used in a search input to wait until the user has finished typing\n */\nexport function useDebounceValue<T>(value: T, delay: number = 300): T {\n  const [debouncedValue, setDebouncedValue] = useState<T>(value);\n\n  useEffect(() => {\n    const timer = setTimeout(() => {\n      setDebouncedValue(value);\n    }, delay);\n\n    return () => {\n      clearTimeout(timer);\n    };\n  }, [value, delay]);\n\n  return debouncedValue;\n}\n"
+  },
+  {
+    "id": "t-08",
+    "type": "theory",
+    "title": "Browser Storage: localStorage, sessionStorage and Cookies",
+    "category": "Browser APIs",
+    "folder": "notes",
+    "filename": "08-browser-storage-comparison.md",
+    "commitMessage": "docs(notes): add Browser Storage comparison (localStorage, sessionStorage, Cookies)",
+    "content": "# 💾 Browser Storage: localStorage vs sessionStorage vs Cookies\n\nThere are 3 main ways to store user data in the browser:\n\n---\n\n| Feature | localStorage | sessionStorage | Cookies |\n| :--- | :--- | :--- | :--- |\n| **Lifetime** | Persists until manually cleared | Until the tab (window) is closed | Until the set Expire time passes |\n| **Size** | ~5-10 MB | ~5 MB | ~4 KB |\n| **Sent to the server?** | No | No | Yes (sent with every HTTP request) |\n| **Security** | Vulnerable to XSS attacks | Vulnerable to XSS attacks | Can be protected from XSS with the `HttpOnly` flag |\n"
+  },
+  {
+    "id": "p-08",
+    "type": "practical",
+    "title": "Custom Event Emitter / Pub-Sub Implementation",
+    "category": "Design Patterns",
+    "folder": "practice",
+    "filename": "08-event-emitter.ts",
+    "commitMessage": "feat(practice): implement type-safe EventEmitter pub-sub pattern in TypeScript",
+    "content": "/**\n * Type-Safe Event Emitter (Publish-Subscribe Pattern)\n * Exchanging messages between components or modules without global coupling\n */\n\ntype Listener<T> = (data: T) => void;\n\nexport class EventEmitter<Events extends Record<string, any>> {\n  private events: { [K in keyof Events]?: Listener<Events[K]>[] } = {};\n\n  on<K extends keyof Events>(event: K, listener: Listener<Events[K]>): () => void {\n    if (!this.events[event]) {\n      this.events[event] = [];\n    }\n    this.events[event]!.push(listener);\n\n    // Return the unsubscribe function\n    return () => this.off(event, listener);\n  }\n\n  off<K extends keyof Events>(event: K, listener: Listener<Events[K]>): void {\n    if (!this.events[event]) return;\n    this.events[event] = this.events[event]!.filter(l => l !== listener);\n  }\n\n  emit<K extends keyof Events>(event: K, data: Events[K]): void {\n    if (!this.events[event]) return;\n    this.events[event]!.forEach(listener => listener(data));\n  }\n}\n"
+  },
+  {
+    "id": "t-09",
+    "type": "theory",
+    "title": "Clean Code: SOLID and DRY Principles in Frontend Development",
+    "category": "Software Architecture",
+    "folder": "notes",
+    "filename": "09-clean-code-principles-frontend.md",
+    "commitMessage": "docs(notes): add Clean Code and DRY guidelines for frontend engineering",
+    "content": "# 🧼 Clean Code Principles in Frontend Development\n\nWriting clean code not only makes teamwork easier, but also prevents bugs when extending the project in the future.\n\n---\n\n## 🎯 4 Golden Rules:\n\n1. **DRY (Don't Repeat Yourself)**:\n   * Don't repeat the same code in two places. Extract it into a separate function or Custom Hook.\n2. **KISS (Keep It Simple, Stupid)**:\n   * A simple solution is always better than a complex architecture.\n3. **Single Responsibility**:\n   * A component should do only one thing (for example, `UserCard` should only display the profile, not deal with loading data from the API).\n4. **Clear and meaningful naming**:\n   * Don't name variables `data`, `item`, or `x`; give them clear names that say what they are (`userData`, `productItem`).\n"
+  },
+  {
+    "id": "p-09",
+    "type": "practical",
+    "title": "useClickOutside Hook for Modals and Dropdowns",
+    "category": "React Hooks",
+    "folder": "practice",
+    "filename": "09-use-click-outside.ts",
+    "commitMessage": "feat(practice): add useClickOutside hook for modal and dropdown dismissing",
+    "content": "import { useEffect, RefObject } from 'react';\n\n/**\n * useClickOutside Hook\n * Closes a modal or menu when the user clicks outside the given element\n */\nexport function useClickOutside<T extends HTMLElement = HTMLElement>(\n  ref: RefObject<T | null>,\n  handler: (event: MouseEvent | TouchEvent) => void\n): void {\n  useEffect(() => {\n    const listener = (event: MouseEvent | TouchEvent) => {\n      const el = ref.current;\n      if (!el || el.contains((event.target as Node) || null)) {\n        return;\n      }\n      handler(event);\n    };\n\n    document.addEventListener('mousedown', listener);\n    document.addEventListener('touchstart', listener);\n\n    return () => {\n      document.removeEventListener('mousedown', listener);\n      document.removeEventListener('touchstart', listener);\n    };\n  }, [ref, handler]);\n}\n"
+  },
+  {
+    "id": "t-10",
+    "type": "theory",
+    "title": "Core Web Vitals: LCP, INP and CLS Optimization",
+    "category": "Web Performance",
+    "folder": "notes",
+    "filename": "10-core-web-vitals-guide.md",
+    "commitMessage": "docs(notes): add Core Web Vitals optimization guide (LCP, INP, CLS)",
+    "content": "# 🚀 Core Web Vitals: A Guide to Improving Site Speed\n\nThe 3 key metrics defined by Google for evaluating a website's user experience (UX):\n\n---\n\n1. **LCP (Largest Contentful Paint)**:\n   * How quickly the main large piece of content (for example, a hero image or a large block of text) becomes visible.\n   * *Good score*: < 2.5 seconds.\n2. **INP (Interaction to Next Paint)**:\n   * How quickly the screen responds when the user clicks a button on the page.\n   * *Good score*: < 200 ms.\n3. **CLS (Cumulative Layout Shift)**:\n   * Elements unexpectedly jumping and changing position while the page is loading.\n   * *Good score*: < 0.1.\n"
+  },
+  {
+    "id": "p-10",
+    "type": "practical",
+    "title": "Async Task Queue Processor with Concurrency Limit",
+    "category": "Asynchronous Programming",
+    "folder": "practice",
+    "filename": "10-async-queue-pool.ts",
+    "commitMessage": "feat(practice): implement async task queue processor with concurrency pool",
+    "content": "/**\n * Async Task Queue Pool\n * A queue manager that runs at most N requests in parallel at the same time\n */\n\nexport class AsyncQueue {\n  private queue: (() => Promise<any>)[] = [];\n  private running = 0;\n\n  constructor(private concurrency: number = 3) {}\n\n  add<T>(task: () => Promise<T>): Promise<T> {\n    return new Promise<T>((resolve, reject) => {\n      this.queue.push(async () => {\n        try {\n          const result = await task();\n          resolve(result);\n        } catch (error) {\n          reject(error);\n        }\n      });\n      this.processNext();\n    });\n  }\n\n  private async processNext(): Promise<void> {\n    if (this.running >= this.concurrency || this.queue.length === 0) {\n      return;\n    }\n\n    this.running++;\n    const nextTask = this.queue.shift();\n\n    if (nextTask) {\n      try {\n        await nextTask();\n      } finally {\n        this.running--;\n        this.processNext();\n      }\n    }\n  }\n}\n"
+  }
+]

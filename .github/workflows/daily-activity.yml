@@ -1,0 +1,55 @@
+name: Daily Activity Auto-Push
+
+on:
+  schedule:
+    # Every day at 23:30 Tashkent time (UTC 18:30)
+    - cron: "30 18 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  check-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Set up Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Check today's push activity
+        id: check_activity
+        run: |
+          set +e
+          node scripts/check-daily-activity.cjs
+          STATUS=$?
+          echo "status=$STATUS" >> $GITHUB_OUTPUT
+          exit 0
+
+      - name: If nothing was pushed today - create the next lesson/problem
+        id: publish_topic
+        if: steps.check_activity.outputs.status == '10'
+        run: |
+          node scripts/publish-daily-topic.cjs
+
+      - name: Commit and push changes
+        if: steps.check_activity.outputs.status == '10'
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "${{ steps.publish_topic.outputs.commit_msg }}"
+          commit_user_name: "Komila Zokirova"
+          commit_user_email: "zokirovakomila500@gmail.com"
+          commit_author: "Komila Zokirova <zokirovakomila500@gmail.com>"
+
+      - name: If code was already pushed today
+        if: steps.check_activity.outputs.status == '0'
+        run: |
+          echo "🎉 Komila has already pushed code today! No new commit needed."
