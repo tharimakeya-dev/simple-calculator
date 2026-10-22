@@ -26,10 +26,12 @@ export const HistoryDrawer: React.FC<HistoryDrawerProps> = ({
         <div className="flex items-center justify-between px-5 py-4 border-b border-slate-100 dark:border-slate-800">
           <div>
             <h2 className="text-base font-bold text-slate-800 dark:text-slate-100">
-              Hisoblash tarixi
+              Calculation history
             </h2>
             <p className="text-xs text-slate-400">
-              {history.length > 0 ? `${history.length} ta amallar saqlangan` : 'Hozircha tarix bo\'sh'}
+              {history.length > 0
+                ? `${history.length} ${history.length === 1 ? 'calculation' : 'calculations'} saved`
+                : 'History is empty for now'}
             </p>
           </div>
           <button
@@ -45,7 +47,7 @@ export const HistoryDrawer: React.FC<HistoryDrawerProps> = ({
         <div className="flex-1 overflow-y-auto p-4 space-y-2">
           {history.length === 0 ? (
             <div className="text-center py-12 text-slate-400 text-sm">
-              <p>Amallarni bajarganingizda bu yerda saqlanadi.</p>
+              <p>Your calculations will be saved here.</p>
             </div>
           ) : (
             history.map((item) => (
@@ -85,14 +87,14 @@ export const HistoryDrawer: React.FC<HistoryDrawerProps> = ({
               className="flex items-center gap-1.5 text-xs font-semibold text-rose-500 hover:text-rose-600 px-3 py-2 rounded-xl hover:bg-rose-50 dark:hover:bg-rose-950/40 transition-colors"
             >
               <Trash2 className="w-4 h-4" />
-              Tarixni tozalash
+              Clear history
             </button>
             <button
               type="button"
               onClick={onClose}
               className="text-xs font-semibold px-4 py-2 rounded-xl bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-300 dark:hover:bg-slate-700 transition-colors"
             >
-              Yopish
+              Close
             </button>
           </div>
         )}
