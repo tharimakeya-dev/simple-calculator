@@ -42,7 +42,7 @@ export const App: React.FC = () => {
     toggleSound,
   } = useCalculator();
 
-  // Dark / Light mavzuni document html elementiga qo'shish
+  // Add the dark / light theme class to the document's html element
   useEffect(() => {
     if (theme === 'dark') {
       document.documentElement.classList.add('dark');
@@ -60,10 +60,10 @@ export const App: React.FC = () => {
     setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
   }, []);
 
-  // Klaviatura hodisalarini ushlash
+  // Capture keyboard events
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // Agar modal ochiq bo'lsa yoki input/textarea ichida bo'lsa
+      // Skip if the user is typing inside an input/textarea
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
 
       const key = e.key;
@@ -112,13 +112,13 @@ export const App: React.FC = () => {
 
   return (
     <main className="min-h-screen w-full flex flex-col items-center justify-center p-4 bg-radial from-slate-100 via-slate-200 to-slate-300 dark:from-slate-900 dark:via-slate-950 dark:to-black transition-colors duration-300">
-      {/* Orqa fon bezaklari */}
+      {/* Background decorations */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-96 h-96 bg-blue-500/10 dark:bg-blue-600/10 rounded-full blur-3xl" />
         <div className="absolute bottom-1/4 left-1/3 w-80 h-80 bg-indigo-500/10 dark:bg-indigo-600/10 rounded-full blur-3xl" />
       </div>
 
-      {/* Kalkulyator korpusi */}
+      {/* Calculator body */}
       <div className="relative w-full max-w-sm glass-panel bg-white/80 dark:bg-slate-900/80 rounded-3xl shadow-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800/80 backdrop-blur-xl">
         <Header
           theme={theme}
@@ -149,12 +149,12 @@ export const App: React.FC = () => {
         {/* Footer info */}
         <div className="py-2.5 text-center border-t border-slate-100 dark:border-slate-800/80 bg-slate-50/50 dark:bg-slate-900/50">
           <p className="text-[11px] text-slate-400 dark:text-slate-500 font-medium">
-            Tugmalar: <kbd className="px-1 py-0.5 rounded bg-slate-200/70 dark:bg-slate-800 text-[10px]">Enter</kbd> natija, <kbd className="px-1 py-0.5 rounded bg-slate-200/70 dark:bg-slate-800 text-[10px]">H</kbd> tarix, <kbd className="px-1 py-0.5 rounded bg-slate-200/70 dark:bg-slate-800 text-[10px]">T</kbd> rejim
+            Keys: <kbd className="px-1 py-0.5 rounded bg-slate-200/70 dark:bg-slate-800 text-[10px]">Enter</kbd> result, <kbd className="px-1 py-0.5 rounded bg-slate-200/70 dark:bg-slate-800 text-[10px]">H</kbd> history, <kbd className="px-1 py-0.5 rounded bg-slate-200/70 dark:bg-slate-800 text-[10px]">T</kbd> theme
           </p>
         </div>
       </div>
 
-      {/* Modallar */}
+      {/* Modals */}
       <HistoryDrawer
         isOpen={isHistoryOpen}
         onClose={() => setIsHistoryOpen(false)}

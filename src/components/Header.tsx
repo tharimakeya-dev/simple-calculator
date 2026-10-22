@@ -28,7 +28,7 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
         <div>
           <h1 className="text-sm font-bold tracking-tight text-slate-800 dark:text-slate-100">
-            Oddiy Kalkulyator
+            Simple Calculator
           </h1>
           <p className="text-[10px] text-slate-400 dark:text-slate-500">
             React + TypeScript + Tailwind
@@ -40,7 +40,7 @@ export const Header: React.FC<HeaderProps> = ({
         <button
           type="button"
           onClick={toggleSound}
-          title={soundEnabled ? "Tovushni o'chirish" : "Tovushni yoqish"}
+          title={soundEnabled ? "Turn sound off" : "Turn sound on"}
           className="p-2 rounded-xl text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-100 hover:bg-slate-200/60 dark:hover:bg-slate-800/60 transition-colors"
         >
           {soundEnabled ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4 text-red-500" />}
@@ -49,7 +49,7 @@ export const Header: React.FC<HeaderProps> = ({
         <button
           type="button"
           onClick={toggleTheme}
-          title="Mavzuni o'zgartirish (Light / Dark)"
+          title="Toggle theme (Light / Dark)"
           className="p-2 rounded-xl text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-100 hover:bg-slate-200/60 dark:hover:bg-slate-800/60 transition-colors"
         >
           {theme === 'dark' ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-indigo-500" />}
@@ -58,7 +58,7 @@ export const Header: React.FC<HeaderProps> = ({
         <button
           type="button"
           onClick={onOpenHistory}
-          title="Hisoblash tarixi"
+          title="Calculation history"
           className="relative p-2 rounded-xl text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-100 hover:bg-slate-200/60 dark:hover:bg-slate-800/60 transition-colors"
         >
           <History className="w-4 h-4" />
@@ -70,7 +70,7 @@ export const Header: React.FC<HeaderProps> = ({
         <button
           type="button"
           onClick={onOpenHelp}
-          title="Klaviatura tugmalari yordami"
+          title="Keyboard shortcuts help"
           className="p-2 rounded-xl text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-100 hover:bg-slate-200/60 dark:hover:bg-slate-800/60 transition-colors"
         >
           <HelpCircle className="w-4 h-4" />

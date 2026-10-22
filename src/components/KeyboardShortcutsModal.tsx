@@ -13,14 +13,14 @@ export const KeyboardShortcutsModal: React.FC<KeyboardShortcutsModalProps> = ({
   if (!isOpen) return null;
 
   const shortcuts = [
-    { key: '0 - 9', desc: 'Raqamlar' },
-    { key: '+  -  *  /', desc: 'Asosiy amallar (qo\'shish, ayrish, ko\'paytirish, bo\'lish)' },
-    { key: 'Enter yoki =', desc: 'Hisoblash (natija)' },
-    { key: 'Backspace', desc: 'Oxirgi raqamni o\'chirish' },
-    { key: 'Escape yoki c', desc: 'Kalkulyatorni tozalash (AC)' },
-    { key: '%', desc: 'Foiz amali' },
-    { key: 'h', desc: 'Tarix panelini ochish/yopish' },
-    { key: 't', desc: 'Mavzuni almashtirish (Dark / Light)' },
+    { key: '0 - 9', desc: 'Digits' },
+    { key: '+  -  *  /', desc: 'Basic operations (add, subtract, multiply, divide)' },
+    { key: 'Enter or =', desc: 'Calculate (result)' },
+    { key: 'Backspace', desc: 'Delete last digit' },
+    { key: 'Escape or c', desc: 'Clear calculator (AC)' },
+    { key: '%', desc: 'Percentage' },
+    { key: 'h', desc: 'Open/close history panel' },
+    { key: 't', desc: 'Toggle theme (Dark / Light)' },
   ];
 
   return (
@@ -30,7 +30,7 @@ export const KeyboardShortcutsModal: React.FC<KeyboardShortcutsModalProps> = ({
           <div className="flex items-center gap-2">
             <Keyboard className="w-5 h-5 text-blue-500" />
             <h2 className="text-base font-bold text-slate-800 dark:text-slate-100">
-              Klaviatura tugmalari
+              Keyboard Shortcuts
             </h2>
           </div>
           <button
@@ -64,7 +64,7 @@ export const KeyboardShortcutsModal: React.FC<KeyboardShortcutsModalProps> = ({
             onClick={onClose}
             className="text-xs font-semibold px-4 py-2 rounded-xl bg-blue-600 text-white hover:bg-blue-700 transition-colors"
           >
-            Tushunarli
+            Got it
           </button>
         </div>
       </div>

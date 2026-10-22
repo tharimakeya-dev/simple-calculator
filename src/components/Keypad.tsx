@@ -51,39 +51,39 @@ export const Keypad: React.FC<KeypadProps> = ({
 
   return (
     <div className="p-3 space-y-2">
-      {/* Tezkor ilmiy funksiyalar (x², √x, 1/x, ±) */}
+      {/* দ্রুত বৈজ্ঞানিক ফাংশন (x², √x, 1/x, ±) */}
       <div className="grid grid-cols-4 gap-2">
-        <button type="button" onClick={onSquare} className={sciBtn} title="Kvadrat (x²)">
+        <button type="button" onClick={onSquare} className={sciBtn} title="বর্গ (x²)">
           x²
         </button>
-        <button type="button" onClick={onSquareRoot} className={sciBtn} title="Kvadrat ildiz (√x)">
+        <button type="button" onClick={onSquareRoot} className={sciBtn} title="বর্গমূল (√x)">
           √x
         </button>
-        <button type="button" onClick={onReciprocal} className={sciBtn} title="Teskari qiymat (1/x)">
+        <button type="button" onClick={onReciprocal} className={sciBtn} title="বিপরীত মান (1/x)">
           1/x
         </button>
-        <button type="button" onClick={onToggleSign} className={sciBtn} title="Ishorani almashtirish (±)">
+        <button type="button" onClick={onToggleSign} className={sciBtn} title="চিহ্ন পরিবর্তন (±)">
           ±
         </button>
       </div>
 
-      {/* Asosiy kalkulyator tugmalari */}
+      {/* প্রধান ক্যালকুলেটর বোতাম */}
       <div className="grid grid-cols-4 gap-2">
-        {/* Row 1 */}
-        <button type="button" onClick={onAllClear} className={actionBtn} title="Hammasini tozalash (AC)">
+        {/* সারি ১ */}
+        <button type="button" onClick={onAllClear} className={actionBtn} title="সব মুছুন (AC)">
           AC
         </button>
-        <button type="button" onClick={onBackspace} className={utilBtn} title="Bitta belgini o'chirish">
+        <button type="button" onClick={onBackspace} className={utilBtn} title="শেষ অক্ষর মুছুন">
           <Delete className="w-5 h-5" />
         </button>
-        <button type="button" onClick={() => onOperator('%')} className={utilBtn} title="Foiz (%)">
+        <button type="button" onClick={() => onOperator('%')} className={utilBtn} title="শতকরা (%)">
           <Percent className="w-4 h-4" />
         </button>
-        <button type="button" onClick={() => onOperator('/')} className={opBtn('/')} title="Bo'lish (÷)">
+        <button type="button" onClick={() => onOperator('/')} className={opBtn('/')} title="ভাগ (÷)">
           <Divide className="w-5 h-5" />
         </button>
 
-        {/* Row 2 */}
+        {/* সারি ২ */}
         <button type="button" onClick={() => onDigit('7')} className={numBtn}>
           7
         </button>
@@ -93,11 +93,11 @@ export const Keypad: React.FC<KeypadProps> = ({
         <button type="button" onClick={() => onDigit('9')} className={numBtn}>
           9
         </button>
-        <button type="button" onClick={() => onOperator('*')} className={opBtn('*')} title="Ko'paytirish (×)">
+        <button type="button" onClick={() => onOperator('*')} className={opBtn('*')} title="গুণ (×)">
           <X className="w-5 h-5" />
         </button>
 
-        {/* Row 3 */}
+        {/* সারি ৩ */}
         <button type="button" onClick={() => onDigit('4')} className={numBtn}>
           4
         </button>
@@ -107,11 +107,11 @@ export const Keypad: React.FC<KeypadProps> = ({
         <button type="button" onClick={() => onDigit('6')} className={numBtn}>
           6
         </button>
-        <button type="button" onClick={() => onOperator('-')} className={opBtn('-')} title="Ayrish (-)">
+        <button type="button" onClick={() => onOperator('-')} className={opBtn('-')} title="বিয়োগ (−)">
           <Minus className="w-5 h-5" />
         </button>
 
-        {/* Row 4 */}
+        {/* সারি ৪ */}
         <button type="button" onClick={() => onDigit('1')} className={numBtn}>
           1
         </button>
@@ -121,18 +121,18 @@ export const Keypad: React.FC<KeypadProps> = ({
         <button type="button" onClick={() => onDigit('3')} className={numBtn}>
           3
         </button>
-        <button type="button" onClick={() => onOperator('+')} className={opBtn('+')} title="Qo'shish (+)">
+        <button type="button" onClick={() => onOperator('+')} className={opBtn('+')} title="যোগ (+)">
           <Plus className="w-5 h-5" />
         </button>
 
-        {/* Row 5 */}
+        {/* সারি ৫ */}
         <button type="button" onClick={() => onDigit('0')} className={`${numBtn} col-span-2`}>
           0
         </button>
-        <button type="button" onClick={onDecimal} className={numBtn} title="O'nlik nuqta (.)">
+        <button type="button" onClick={onDecimal} className={numBtn} title="দশমিক বিন্দু (.)">
           .
         </button>
-        <button type="button" onClick={onEquals} className={equalsBtn} title="Natija (=)">
+        <button type="button" onClick={onEquals} className={equalsBtn} title="ফলাফল (=)">
           <Equal className="w-6 h-6" />
         </button>
       </div>

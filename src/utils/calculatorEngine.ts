@@ -1,11 +1,11 @@
 import { Operator } from '../types/calculator';
 
 /**
- * Aniq hisoblash va suzuvchi vergul xatolarini to'g'rilash (masalan: 0.1 + 0.2 = 0.3)
+ * Corrects precise calculation and floating-point errors (e.g. 0.1 + 0.2 = 0.3)
  */
 export const formatNumber = (num: number): string => {
   if (!isFinite(num)) {
-    return 'Xatolik';
+    return 'Error';
   }
   // Trim scientific or floating point quirks
   const rounded = parseFloat(num.toPrecision(12));
@@ -26,7 +26,7 @@ export const calculateResult = (
       return firstOperand * secondOperand;
     case '/':
       if (secondOperand === 0) {
-        throw new Error('Nolga bo\'lib bo\'lmaydi');
+        throw new Error('Cannot divide by zero');
       }
       return firstOperand / secondOperand;
     case '%':
@@ -37,7 +37,7 @@ export const calculateResult = (
 };
 
 /**
- * Web Audio API yordamida yoqimli va yengil click tovushini hosil qilish
+ * Generates a pleasant, light click sound using the Web Audio API
  */
 export const playKeySound = (type: 'number' | 'operator' | 'action' | 'equals') => {
   try {
@@ -76,6 +76,6 @@ export const playKeySound = (type: 'number' | 'operator' | 'action' | 'equals') 
     osc.start(now);
     osc.stop(now + duration);
   } catch {
-    // Brauzer audio bloklagan bo'lsa indamay o'tib ketadi
+    // Silently ignored if the browser has blocked audio
   }
 };
