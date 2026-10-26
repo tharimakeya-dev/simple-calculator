@@ -15,3 +15,4 @@ If the user has **not** pushed code to any repo that day, a new entry is automat
 | 2026-10-22 | 02:54           | 💻 Practical Code | Deep Clone Utility with Circular Reference Handling        | [04-deep-clone-util.ts](amaliyot/04-deep-clone-util.ts)                          |
 | 2026-10-25 | 02:04 | 📚 Notes | JavaScript Event Loop, Microtasks and Macrotasks | [01-javascript-event-loop.md](notes/01-javascript-event-loop.md) |
 | 2026-10-26 | 02:06 | 💻 Practical Code | Array Transformation Utilities (groupBy, chunk, uniqueBy) | [01-array-transformation-utils.ts](practice/01-array-transformation-utils.ts) |
+| 2026-10-27 | 03:49 | 📚 Notes | React useEffect Lifecycle and Cleanup Functions | [02-react-use-effect-lifecycle.md](notes/02-react-use-effect-lifecycle.md) |
