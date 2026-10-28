@@ -17,3 +17,4 @@ If the user has **not** pushed code to any repo that day, a new entry is automat
 | 2026-10-26 | 02:06 | 💻 Practical Code | Array Transformation Utilities (groupBy, chunk, uniqueBy) | [01-array-transformation-utils.ts](practice/01-array-transformation-utils.ts) |
 | 2026-10-27 | 03:49 | 📚 Notes | React useEffect Lifecycle and Cleanup Functions | [02-react-use-effect-lifecycle.md](notes/02-react-use-effect-lifecycle.md) |
 | 2026-10-28 | 03:30 | 💻 Practical Code | Custom Debounce and Throttle Implementation | [02-custom-debounce-throttle.ts](practice/02-custom-debounce-throttle.ts) |
+| 2026-10-29 | 03:45 | 📚 Notes | Zustand vs Redux Toolkit: Why Is Zustand Becoming Popular? | [03-zustand-vs-redux-toolkit.md](notes/03-zustand-vs-redux-toolkit.md) |
