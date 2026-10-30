@@ -19,3 +19,4 @@ If the user has **not** pushed code to any repo that day, a new entry is automat
 | 2026-10-28 | 03:30 | 💻 Practical Code | Custom Debounce and Throttle Implementation | [02-custom-debounce-throttle.ts](practice/02-custom-debounce-throttle.ts) |
 | 2026-10-29 | 03:45 | 📚 Notes | Zustand vs Redux Toolkit: Why Is Zustand Becoming Popular? | [03-zustand-vs-redux-toolkit.md](notes/03-zustand-vs-redux-toolkit.md) |
 | 2026-10-30 | 03:54 | 💻 Practical Code | useLocalStorage React Custom Hook with Cross-Tab Sync | [03-use-local-storage.ts](practice/03-use-local-storage.ts) |
+| 2026-10-31 | 03:35 | 📚 Notes | JavaScript Closures and Scope | [04-javascript-closures.md](notes/04-javascript-closures.md) |
