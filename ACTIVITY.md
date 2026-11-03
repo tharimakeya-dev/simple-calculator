@@ -22,3 +22,4 @@ If the user has **not** pushed code to any repo that day, a new entry is automat
 | 2026-10-31 | 03:35 | 📚 Notes | JavaScript Closures and Scope | [04-javascript-closures.md](notes/04-javascript-closures.md) |
 | 2026-11-01 | 02:47 | 💻 Practical Code | Deep Clone Utility with Circular Reference Handling | [04-deep-clone-util.ts](practice/04-deep-clone-util.ts) |
 | 2026-11-02 | 03:15 | 📚 Notes | React Performance: useMemo, useCallback and React.memo | [05-react-performance-optimization.md](notes/05-react-performance-optimization.md) |
+| 2026-11-03 | 06:09 | 💻 Practical Code | Fetch with Exponential Backoff Retry Utility | [05-fetch-with-retry.ts](practice/05-fetch-with-retry.ts) |
