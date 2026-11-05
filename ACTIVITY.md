@@ -25,3 +25,4 @@ If the user has **not** pushed code to any repo that day, a new entry is automat
 | 2026-11-03 | 06:09 | 💻 Practical Code | Fetch with Exponential Backoff Retry Utility | [05-fetch-with-retry.ts](practice/05-fetch-with-retry.ts) |
 | 2026-11-04 | 04:35 | 📚 Notes | TypeScript: Interface vs Type Aliases Comparison | [06-typescript-interface-vs-type.md](notes/06-typescript-interface-vs-type.md) |
 | 2026-11-05 | 04:52 | 💻 Practical Code | Form Validation and Sanitization Rules | [06-form-validators.ts](practice/06-form-validators.ts) |
+| 2026-11-06 | 04:47 | 📚 Notes | CSS Grid and Flexbox: 1D vs 2D Layout Differences | [07-css-flexbox-vs-grid.md](notes/07-css-flexbox-vs-grid.md) |
