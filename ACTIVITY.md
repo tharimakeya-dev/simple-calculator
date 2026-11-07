@@ -27,3 +27,4 @@ If the user has **not** pushed code to any repo that day, a new entry is automat
 | 2026-11-05 | 04:52 | 💻 Practical Code | Form Validation and Sanitization Rules | [06-form-validators.ts](practice/06-form-validators.ts) |
 | 2026-11-06 | 04:47 | 📚 Notes | CSS Grid and Flexbox: 1D vs 2D Layout Differences | [07-css-flexbox-vs-grid.md](notes/07-css-flexbox-vs-grid.md) |
 | 2026-11-07 | 04:24 | 💻 Practical Code | useDebounceValue Hook for Search Inputs | [07-use-debounce-value.ts](practice/07-use-debounce-value.ts) |
+| 2026-11-08 | 03:12 | 📚 Notes | Browser Storage: localStorage, sessionStorage and Cookies | [08-browser-storage-comparison.md](notes/08-browser-storage-comparison.md) |
