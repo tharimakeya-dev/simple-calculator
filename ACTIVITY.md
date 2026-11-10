@@ -30,3 +30,4 @@ If the user has **not** pushed code to any repo that day, a new entry is automat
 | 2026-11-08 | 03:12 | 📚 Notes | Browser Storage: localStorage, sessionStorage and Cookies | [08-browser-storage-comparison.md](notes/08-browser-storage-comparison.md) |
 | 2026-11-09 | 03:21 | 💻 Practical Code | Custom Event Emitter / Pub-Sub Implementation | [08-event-emitter.ts](practice/08-event-emitter.ts) |
 | 2026-11-10 | 06:43 | 📚 Notes | Clean Code: SOLID and DRY Principles in Frontend Development | [09-clean-code-principles-frontend.md](notes/09-clean-code-principles-frontend.md) |
+| 2026-11-11 | 04:38 | 💻 Practical Code | useClickOutside Hook for Modals and Dropdowns | [09-use-click-outside.ts](practice/09-use-click-outside.ts) |
