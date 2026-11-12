@@ -32,3 +32,4 @@ If the user has **not** pushed code to any repo that day, a new entry is automat
 | 2026-11-10 | 06:43 | 📚 Notes | Clean Code: SOLID and DRY Principles in Frontend Development | [09-clean-code-principles-frontend.md](notes/09-clean-code-principles-frontend.md) |
 | 2026-11-11 | 04:38 | 💻 Practical Code | useClickOutside Hook for Modals and Dropdowns | [09-use-click-outside.ts](practice/09-use-click-outside.ts) |
 | 2026-11-12 | 05:55 | 📚 Notes | Core Web Vitals: LCP, INP and CLS Optimization | [10-core-web-vitals-guide.md](notes/10-core-web-vitals-guide.md) |
+| 2026-11-13 | 04:46 | 💻 Practical Code | Async Task Queue Processor with Concurrency Limit | [10-async-queue-pool.ts](practice/10-async-queue-pool.ts) |
