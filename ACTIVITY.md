@@ -33,3 +33,4 @@ If the user has **not** pushed code to any repo that day, a new entry is automat
 | 2026-11-11 | 04:38 | 💻 Practical Code | useClickOutside Hook for Modals and Dropdowns | [09-use-click-outside.ts](practice/09-use-click-outside.ts) |
 | 2026-11-12 | 05:55 | 📚 Notes | Core Web Vitals: LCP, INP and CLS Optimization | [10-core-web-vitals-guide.md](notes/10-core-web-vitals-guide.md) |
 | 2026-11-13 | 04:46 | 💻 Practical Code | Async Task Queue Processor with Concurrency Limit | [10-async-queue-pool.ts](practice/10-async-queue-pool.ts) |
+| 2026-11-14 | 04:46 | 💻 Practical Code | Fetch with Exponential Backoff Retry Utility | [extra-5025-05-fetch-with-retry.ts](practice/extra-5025-05-fetch-with-retry.ts) |
