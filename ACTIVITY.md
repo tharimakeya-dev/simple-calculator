@@ -35,3 +35,4 @@ If the user has **not** pushed code to any repo that day, a new entry is automat
 | 2026-11-13 | 04:46 | 💻 Practical Code | Async Task Queue Processor with Concurrency Limit | [10-async-queue-pool.ts](practice/10-async-queue-pool.ts) |
 | 2026-11-14 | 04:46 | 💻 Practical Code | Fetch with Exponential Backoff Retry Utility | [extra-5025-05-fetch-with-retry.ts](practice/extra-5025-05-fetch-with-retry.ts) |
 | 2026-11-15 | 03:40 | 📚 Notes | JavaScript Closures and Scope | [extra-5069-04-javascript-closures.md](notes/extra-5069-04-javascript-closures.md) |
+| 2026-11-16 | 04:04 | 💻 Practical Code | useClickOutside Hook for Modals and Dropdowns | [extra-6714-09-use-click-outside.ts](practice/extra-6714-09-use-click-outside.ts) |
