@@ -39,3 +39,4 @@ If the user has **not** pushed code to any repo that day, a new entry is automat
 | 2026-11-17 | 06:57 | 💻 Practical Code | useDebounceValue Hook for Search Inputs | [extra-7445-07-use-debounce-value.ts](practice/extra-7445-07-use-debounce-value.ts) |
 | 2026-11-18 | 06:10 | 💻 Practical Code | Custom Event Emitter / Pub-Sub Implementation | [extra-4629-08-event-emitter.ts](practice/extra-4629-08-event-emitter.ts) |
 | 2026-11-19 | 05:40 | 💻 Practical Code | Deep Clone Utility with Circular Reference Handling | [extra-7904-04-deep-clone-util.ts](practice/extra-7904-04-deep-clone-util.ts) |
+| 2026-11-20 | 05:48 | 📚 Notes | Browser Storage: localStorage, sessionStorage and Cookies | [extra-0382-08-browser-storage-comparison.md](notes/extra-0382-08-browser-storage-comparison.md) |
