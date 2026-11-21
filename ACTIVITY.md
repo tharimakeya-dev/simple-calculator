@@ -40,3 +40,4 @@ If the user has **not** pushed code to any repo that day, a new entry is automat
 | 2026-11-18 | 06:10 | 💻 Practical Code | Custom Event Emitter / Pub-Sub Implementation | [extra-4629-08-event-emitter.ts](practice/extra-4629-08-event-emitter.ts) |
 | 2026-11-19 | 05:40 | 💻 Practical Code | Deep Clone Utility with Circular Reference Handling | [extra-7904-04-deep-clone-util.ts](practice/extra-7904-04-deep-clone-util.ts) |
 | 2026-11-20 | 05:48 | 📚 Notes | Browser Storage: localStorage, sessionStorage and Cookies | [extra-0382-08-browser-storage-comparison.md](notes/extra-0382-08-browser-storage-comparison.md) |
+| 2026-11-21 | 05:06 | 💻 Practical Code | Form Validation and Sanitization Rules | [extra-0899-06-form-validators.ts](practice/extra-0899-06-form-validators.ts) |
