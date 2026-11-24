@@ -42,3 +42,4 @@ If the user has **not** pushed code to any repo that day, a new entry is automat
 | 2026-11-20 | 05:48 | 📚 Notes | Browser Storage: localStorage, sessionStorage and Cookies | [extra-0382-08-browser-storage-comparison.md](notes/extra-0382-08-browser-storage-comparison.md) |
 | 2026-11-21 | 05:06 | 💻 Practical Code | Form Validation and Sanitization Rules | [extra-0899-06-form-validators.ts](practice/extra-0899-06-form-validators.ts) |
 | 2026-11-22 | 04:31 | 💻 Practical Code | Custom Debounce and Throttle Implementation | [extra-5371-02-custom-debounce-throttle.ts](practice/extra-5371-02-custom-debounce-throttle.ts) |
+| 2026-11-24 | 09:01 | 📚 Notes | React Performance: useMemo, useCallback and React.memo | [extra-8807-05-react-performance-optimization.md](notes/extra-8807-05-react-performance-optimization.md) |
