@@ -45,3 +45,4 @@ If the user has **not** pushed code to any repo that day, a new entry is automat
 | 2026-11-24 | 09:01 | 📚 Notes | React Performance: useMemo, useCallback and React.memo | [extra-8807-05-react-performance-optimization.md](notes/extra-8807-05-react-performance-optimization.md) |
 | 2026-11-25 | 07:43 | 💻 Practical Code | useClickOutside Hook for Modals and Dropdowns | [extra-7944-09-use-click-outside.ts](practice/extra-7944-09-use-click-outside.ts) |
 | 2026-11-26 | 06:54 | 📚 Notes | Zustand vs Redux Toolkit: Why Is Zustand Becoming Popular? | [extra-0811-03-zustand-vs-redux-toolkit.md](notes/extra-0811-03-zustand-vs-redux-toolkit.md) |
+| 2026-11-27 | 06:52 | 💻 Practical Code | Async Task Queue Processor with Concurrency Limit | [extra-3640-10-async-queue-pool.ts](practice/extra-3640-10-async-queue-pool.ts) |
